@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RISC-V Vector Instruction Suffix Cheat Sheet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: #eee;
+            margin: 20px 0;
+        }
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧾 RISC-V Vector Instruction Suffix Cheat Sheet</h1>
+
+    <h2>🔍 Understanding the Suffixes</h2>
+    <p>
+        The suffixes like <code>.x.s</code>, <code>.s.x</code>, <code>.v.x</code>, <code>.v.v</code>, etc., describe the <strong>types of operands</strong> used in a vector instruction. They tell you:
+    </p>
+    <ul>
+        <li>Whether each operand is a <strong>vector register</strong>, <strong>scalar integer</strong>, <strong>scalar float</strong>, or <strong>immediate</strong>.</li>
+        <li>The <strong>order of suffixes matches</strong> the order of operands.</li>
+    </ul>
+
+    <hr>
+
+    <h2>📘 Suffix Table</h2>
+    <table>
+        <tr>
+            <th>Suffix</th>
+            <th>Operand Type</th>
+            <th>Meaning Example</th>
+        </tr>
+        <tr>
+            <td><code>.x</code></td>
+            <td>Scalar <strong>integer</strong> register (from x-register)</td>
+            <td><code>vmv.s.x</code> — scalar → vector</td>
+        </tr>
+        <tr>
+            <td><code>.f</code></td>
+            <td>Scalar <strong>float</strong> register (from f-register)</td>
+            <td><code>vfmv.s.f</code> — float → vector</td>
+        </tr>
+        <tr>
+            <td><code>.s</code></td>
+            <td>Scalar from <strong>vector element 0</strong></td>
+            <td><code>vmv.x.s</code> — vector → scalar</td>
+        </tr>
+        <tr>
+            <td><code>.v</code></td>
+            <td>Full <strong>vector register</strong></td>
+            <td><code>vadd.vv</code> — vector + vector</td>
+        </tr>
+        <tr>
+            <td><code>.vx</code></td>
+            <td>Vector + scalar <strong>integer</strong></td>
+            <td><code>vslideup.vx</code></td>
+        </tr>
+        <tr>
+            <td><code>.vf</code></td>
+            <td>Vector + scalar <strong>float</strong></td>
+            <td><code>vfslide1up.vf</code></td>
+        </tr>
+        <tr>
+            <td><code>.vi</code></td>
+            <td>Vector + <strong>immediate</strong></td>
+            <td><code>vslideup.vi</code></td>
+        </tr>
+        <tr>
+            <td><code>.vv</code></td>
+            <td>Vector + vector</td>
+            <td><code>vrgather.vv</code></td>
+        </tr>
+        <tr>
+            <td><code>.vm</code></td>
+            <td>Uses a <strong>mask register</strong></td>
+            <td><code>vcompress.vm</code></td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <h2>📌 Examples</h2>
+    <ul>
+        <li><code>vmv.x.s rd, vs2</code> → <code>x[rd] = vs2[0]</code></li>
+        <li><code>vmv.s.x vd, rs1</code> → <code>vd[0] = x[rs1]</code></li>
+        <li><code>vslideup.vx vd, vs2, rs1</code> → slides elements up by <code>x[rs1]</code></li>
+        <li><code>vrgather.vi vd, vs2, 5</code> → all lanes gather <code>vs2[5]</code></li>
+    </ul>
+
+    <p>The <strong>suffix guides your understanding of operand types</strong> and is essential for correct instruction usage.</p>
+</body>
+</html> 
